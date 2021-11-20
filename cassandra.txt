@@ -1,0 +1,28 @@
+Initiate cassandra, create keyspace (schema) with replication.
+
+# Run Cassandra in one terminal. Assuming the jdk and dependencies were successfully installed.
+- cassandra
+
+# On a different terminal to interact with the running cassandra
+- cqlsh
+
+# Shows all the schemas
+- describe keyspaces;
+
+# Create an 'oath' schema with replication enabled
+- CREATE KEYSPACE oauth WITH REPLICATION = {'class':'SimpleStrategy', 'replication_factor':1};
+
+# Select a schema, show any tables in the schema, create a table with defined PKEYS and columns.
+USE oauth;
+describe tables;
+CREATE TABLE access_tokens( access_token varchar PRIMARY KEY, user_id bigint, client_id bigint, expires bigint);
+
+# View our new table structure
+select * from access_tokens;
+
+# Query by access token
+select * from access_tokens where access_token='mysuperscrettokenid';
+
+
+
+
