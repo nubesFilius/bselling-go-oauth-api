@@ -20,9 +20,7 @@ func GetNewAccessToken() AccessToken {
 }
 
 func (token AccessToken) IsExpired() bool {
-	now := time.Now().UTC()
-	expirationTime := time.Unix(token.Expires, 0)
-	return now.After(expirationTime)
+	return time.Unix(token.Expires, 0).Before(time.Now().UTC())
 }
 
 // Web FrontEnd - Client-Id: 123
